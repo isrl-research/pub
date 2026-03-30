@@ -1,0 +1,10 @@
+# Quarto/Manuscript Junk
+_manuscript/
+_freeze/
+site_libs/
+.quarto/
+*.quarto_ipynb_1
+index-preview.html
+
+# OS files
+.DS_Store

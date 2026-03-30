@@ -1,0 +1,23 @@
+---
+title: 'Research Publications'
+listing:
+  id: pub-listing
+  contents:
+    - '**/index.qmd'
+  type: custom
+  template: _pub-item.ejs.md
+  fields:
+    - title
+    - date
+    - path
+    - subtitle
+    - author
+    - doc-id
+    - doi
+    - draft
+    - license
+  sort: "path asc"
+---
+
+::: {#pub-listing}
+:::
