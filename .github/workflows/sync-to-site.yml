@@ -18,7 +18,10 @@ jobs:
 
       - name: Copy pub files into site/pub/
         run: |
-          rsync -av --delete --exclude='.git' ./ site/pub/ || [ $? -eq 24 ]
+          rsync -av --delete \
+            --exclude='.git' --exclude='.github' --exclude='site/' \
+            --exclude='_freeze/' --exclude='_manuscript/' \
+            ./ site/pub/ || [ $? -eq 24 ]
 
       - name: Commit and push to site
         run: |
