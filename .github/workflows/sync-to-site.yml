@@ -1,0 +1,30 @@
+name: Sync pub to site
+on:
+  push:
+    branches: [main]
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout pub
+        uses: actions/checkout@v4
+
+      - name: Checkout site
+        uses: actions/checkout@v4
+        with:
+          repository: isrl-research/isrl-research.github.io
+          token: ${{ secrets.SYNC_TOKEN }}
+          path: site
+
+      - name: Copy pub files into site/pub/
+        run: |
+          rsync -av --delete --exclude='.git' ./ site/pub/
+
+      - name: Commit and push to site
+        run: |
+          cd site
+          git config user.name "iSRL Sync Bot"
+          git config user.email "sync-bot@users.noreply.github.com"
+          git add pub/
+          git diff --staged --quiet || git commit -m "sync(pub): ${{ github.event.head_commit.message }}"
+          git push
